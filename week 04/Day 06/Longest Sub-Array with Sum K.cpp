@@ -6,21 +6,22 @@ class Solution
 public:
     int lenOfLongestSubarr(vector<int> &arr, int k)
     {
-        int n = arr.size();
-        long long sum=0;
-        int l=0, r=0, ans=INT_MIN;
-        while(r < n)
+        int n = arr.size(), ans = INT_MIN;
+        long long sum = 0;
+        unordered_map<int, int> mp;
+        mp[0] = -1;
+        for (int i = 0; i < n; i++)
         {
-            sum += arr[r];
-            if(sum==k)
+            sum += arr[i];
+            if (mp.find(sum - k) != mp.end())
             {
-                ans = max(ans, r-l+1);
+                ans = max(ans, i - mp[sum - k]);
             }
-            
-            // cout<<r<<" - "<<sum<<", ";
-            r++;
+            if (mp.find(sum) == mp.end())
+            {
+                mp[sum] = i;
+            }
         }
-
         return ans;
     }
 };
