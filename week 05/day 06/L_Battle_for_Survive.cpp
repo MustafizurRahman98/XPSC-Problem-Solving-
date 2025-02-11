@@ -19,16 +19,16 @@ int main()
             cin >> a[i];
         }
 
-        for (ll i = 1; i < n; i++)
+        ll l = 0, r = n - 2;
+        while (l < r)
         {
-            a[i] = a[i] - a[i - 1];
+            a[r] = a[r] - a[l];
+            l++;
         }
 
-        for (ll v : a)
-        {
-            cout << v << " ";
-        }
-        cout << endl;
+        a[n - 1] = a[n - 1] - a[r];
+
+        cout << a[n - 1] << endl;
     }
 
     return 0;
