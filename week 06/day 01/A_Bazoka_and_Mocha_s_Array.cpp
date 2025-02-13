@@ -19,42 +19,41 @@ int main()
             cin >> a[i];
         }
 
-        vector<ll> x, y;
-        ll xx = a[0];
-        x.push_back(xx);
+        vector<ll> b;
         int idx = 1;
         while (idx < n)
         {
-            if (a[idx] >= xx)
-            {
-                x.push_back(a[idx]);
-                xx = a[idx];
-            }
-            else
+            if (a[idx - 1] > a[idx])
             {
                 break;
             }
             idx++;
         }
 
-        while (idx < n)
+        for (int i = idx; i < n; i++)
         {
-            y.push_back(a[idx]);
-            idx++;
+            b.push_back(a[i]);
         }
 
-        for (ll v : x)
+        if (b.empty())
         {
-            cout << v << ", ";
+            cout << "Yes" << endl;
         }
-        cout << endl;
-        for (ll v : y)
+        else if (is_sorted(b.begin(), b.end()))
         {
-            cout << v << " ";
+            if (a[0] >= b[b.size() - 1] || a[idx - 1] <= b[0])
+            {
+                cout << "Yes" << endl;
+            }
+            else
+            {
+                cout << "No" << endl;
+            }
         }
-        cout << endl;
-
-        
+        else
+        {
+            cout << "No" << endl;
+        }
     }
 
     return 0;
